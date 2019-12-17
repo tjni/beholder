@@ -1,4 +1,4 @@
-This is a fork of [google-java-format](https://github.com/google/google-java-format). It makes some parts of it configurable, because beauty is in the eye of the beholder.
+This is a fork of [google-java-format](https://github.com/google/google-java-format). It makes some parts of it configurable, because beauty is in the eye of the beholder. 
 
 ## License
 
