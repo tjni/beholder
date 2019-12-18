@@ -47,12 +47,42 @@ public class JavaFormatterOptions {
     }
   }
 
+  public enum SingleLineJavadocStyle {
+    /***
+     * Single line Javadoc looks like:
+     *
+     * <pre>
+     * <code>
+     *   /** A single line. **&#47;
+     *   public void doSomething() {}
+     * </code>
+     * </pre>
+     */
+    SINGLE_LINE,
+
+    /***
+     * Single line Javadoc looks like:
+     *
+     * <pre>
+     * <code>
+     *   /**
+     *    * A single line.
+     *    **&#47;
+     *   public void doSomething() {}
+     * </code>
+     * </pre>
+     */
+    MULTI_LINE;
+  }
+
   private final Style style;
   private final boolean formatJavadoc;
+  private final SingleLineJavadocStyle singleLineJavadocStyle;
 
-  private JavaFormatterOptions(Style style, boolean formatJavadoc) {
-    this.style = style;
-    this.formatJavadoc = formatJavadoc;
+  private JavaFormatterOptions(Builder builder) {
+    style = builder.style;
+    formatJavadoc = builder.formatJavadoc;
+    singleLineJavadocStyle = builder.singleLineJavadocStyle;
   }
 
   /** Returns the multiplier for the unit of indent. */
@@ -62,6 +92,11 @@ public class JavaFormatterOptions {
 
   boolean formatJavadoc() {
     return formatJavadoc;
+  }
+
+  /** Returns what style to use when formatting Javadoc comments that fit in a single line. */
+  public SingleLineJavadocStyle singleLineJavadocStyle() {
+    return singleLineJavadocStyle;
   }
 
   /** Returns the code style. */
@@ -83,6 +118,7 @@ public class JavaFormatterOptions {
   public static class Builder {
     private Style style = Style.GOOGLE;
     private boolean formatJavadoc = true;
+    private SingleLineJavadocStyle singleLineJavadocStyle = SingleLineJavadocStyle.SINGLE_LINE;
 
     private Builder() {}
 
@@ -96,8 +132,14 @@ public class JavaFormatterOptions {
       return this;
     }
 
+    /** Sets what style to use when formatting Javadoc comments that fit in a single line. */
+    public Builder singleLineJavadocStyle(SingleLineJavadocStyle singleLineJavadocStyle) {
+      this.singleLineJavadocStyle = singleLineJavadocStyle;
+      return this;
+    }
+
     public JavaFormatterOptions build() {
-      return new JavaFormatterOptions(style, formatJavadoc);
+      return new JavaFormatterOptions(this);
     }
   }
 }

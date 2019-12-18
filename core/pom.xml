@@ -22,7 +22,7 @@
   <parent>
     <groupId>com.github.tjni.beholder</groupId>
     <artifactId>beholder-parent</artifactId>
-    <version>1.7.1</version>
+    <version>1.7.2</version>
   </parent>
 
   <artifactId>beholder</artifactId>

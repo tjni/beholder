@@ -1376,6 +1376,10 @@ public final class JavadocFormattingTest {
   }
 
   private void doFormatTest(String[] input, String[] expected) {
+    doFormatTest(formatter, input, expected);
+  }
+
+  private void doFormatTest(Formatter formatter, String[] input, String[] expected) {
     try {
       String actual = formatter.formatSource(Joiner.on('\n').join(input));
       assertThat(actual).isEqualTo(Joiner.on('\n').join(expected) + "\n");
@@ -1414,5 +1418,30 @@ public final class JavadocFormattingTest {
       "}",
     };
     doFormatTest(input, expected);
+  }
+
+  @Test
+  public void singleLineJavadocMultiLineStyle() {
+    Formatter formatter = new Formatter(JavaFormatterOptions.builder()
+        .singleLineJavadocStyle(JavaFormatterOptions.SingleLineJavadocStyle.MULTI_LINE)
+        .build());
+
+    String[] input = {
+        "public class Foo {",
+        "  /** Single line comment. */",
+        "  public void doSomething() {}",
+        "}",
+    };
+
+    String[] output = {
+        "public class Foo {",
+        "  /**",
+        "   * Single line comment.",
+        "   */",
+        "  public void doSomething() {}",
+        "}",
+    };
+
+    doFormatTest(formatter, input, output);
   }
 }
