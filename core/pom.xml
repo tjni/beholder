@@ -20,17 +20,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>com.google.googlejavaformat</groupId>
-    <artifactId>google-java-format-parent</artifactId>
-    <version>1.8-SNAPSHOT</version>
+    <groupId>com.github.tjni.beholder</groupId>
+    <artifactId>beholder-parent</artifactId>
+    <version>1.7.1</version>
   </parent>
 
-  <artifactId>google-java-format</artifactId>
+  <artifactId>beholder</artifactId>
 
-  <name>Google Java Format</name>
+  <name>Beholder</name>
 
   <description>
-    A Java source code formatter that follows Google Java Style.
+    A Java source code formatter.
   </description>
 
   <dependencies>

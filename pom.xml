@@ -25,10 +25,10 @@
     <version>7</version>
   </parent>
 
-  <groupId>com.google.googlejavaformat</groupId>
-  <artifactId>google-java-format-parent</artifactId>
+  <groupId>com.github.tjni.beholder</groupId>
+  <artifactId>beholder-parent</artifactId>
   <packaging>pom</packaging>
-  <version>1.8-SNAPSHOT</version>
+  <version>1.7.1</version>
 
   <modules>
     <module>core</module>
@@ -38,20 +38,15 @@
     -->
   </modules>
 
-  <name>Google Java Format Parent</name>
+  <name>Beholder Parent</name>
 
   <description>
-    A Java source code formatter that follows Google Java Style.
+    A Java source code formatter.
   </description>
 
-  <url>https://github.com/google/google-java-format</url>
+  <url>https://github.com/tjni/beholder</url>
 
-  <inceptionYear>2015</inceptionYear>
-
-  <organization>
-    <name>Google Inc.</name>
-    <url>http://www.google.com/</url>
-  </organization>
+  <inceptionYear>2019</inceptionYear>
 
   <licenses>
     <license>
@@ -63,29 +58,23 @@
 
   <developers>
     <developer>
-      <id>jdd</id>
-      <name>John DeTreville</name>
-      <email>jdd@google.com</email>
-      <organization>Google Inc.</organization>
-      <organizationUrl>http://www.google.com/</organizationUrl>
-      <roles>
-        <role>owner</role>
-        <role>developer</role>
-      </roles>
-      <timezone>-8</timezone>
+      <name>Theodore Ni</name>
+      <email>zyloch@gmail.com</email>
+      <organization>None</organization>
+      <organizationUrl>https://github.com/tjni</organizationUrl>
     </developer>
   </developers>
 
   <scm>
-    <url>http://github.com/google/google-java-format/</url>
-    <connection>scm:git:git://github.com/google/google-java-format.git</connection>
-    <developerConnection>scm:git:ssh://git@github.com/google/google-java-format.git</developerConnection>
+    <url>https://github.com/tjni/beholder/</url>
+    <connection>scm:git:git://github.com/tjni/beholder.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/tjni/beholder.git</developerConnection>
     <tag>HEAD</tag>
   </scm>
 
   <issueManagement>
     <system>GitHub Issues</system>
-    <url>http://github.com/google/google-java-format/issues</url>
+    <url>http://github.com/tjni/beholder/issues</url>
   </issueManagement>
 
   <prerequisites>
