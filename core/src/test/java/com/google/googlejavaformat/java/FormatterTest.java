@@ -474,12 +474,22 @@ public final class FormatterTest {
   }
 
   @Test
-  public void spaceInsideEmptyBlock() throws Exception {
+  public void spaceInsideEmptyAnnotationBlock() throws Exception {
     Formatter formatter = new Formatter(JavaFormatterOptions.builder()
         .spaceInsideEmptyBlock(true)
         .build());
 
     assertThat(formatter.formatSource("public @interface VisibleForTesting {}"))
         .isEqualTo("public @interface VisibleForTesting { }\n");
+  }
+
+  @Test
+  public void spaceInsideEmptyConstructor() throws Exception {
+    Formatter formatter = new Formatter(JavaFormatterOptions.builder()
+        .spaceInsideEmptyBlock(true)
+        .build());
+
+    assertThat(formatter.formatSource("public class Utilities {\n  private Utilities() {}\n}"))
+        .isEqualTo("public class Utilities {\n" + "  private Utilities() { }\n" + "}\n");
   }
 }

@@ -605,6 +605,8 @@ public final class OpsBuilder {
       newOps.add(op);
       if (!(op instanceof OpenOp)) {
         afterForcedBreak = isForcedBreak(op);
+      }
+      if (!(op instanceof OpenOp || op instanceof CloseOp)) {
         afterOpenBrace = isOpenBrace(op);
       }
     }
