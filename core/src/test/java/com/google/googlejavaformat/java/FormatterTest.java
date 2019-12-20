@@ -472,4 +472,14 @@ public final class FormatterTest {
                 + " chance to interrupt;\n"
                 + "}\n");
   }
+
+  @Test
+  public void spaceInsideEmptyBlock() throws Exception {
+    Formatter formatter = new Formatter(JavaFormatterOptions.builder()
+        .spaceInsideEmptyBlock(true)
+        .build());
+
+    assertThat(formatter.formatSource("public @interface VisibleForTesting {}"))
+        .isEqualTo("public @interface VisibleForTesting { }\n");
+  }
 }

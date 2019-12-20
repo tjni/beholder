@@ -152,7 +152,7 @@ public final class Formatter {
     if (!Iterables.isEmpty(errorDiagnostics)) {
       throw FormatterException.fromJavacDiagnostics(errorDiagnostics);
     }
-    OpsBuilder builder = new OpsBuilder(javaInput, javaOutput);
+    OpsBuilder builder = new OpsBuilder(javaInput, javaOutput, options);
     // Output the compilation unit.
     new JavaInputAstVisitor(builder, options.indentationMultiplier()).scan(unit, null);
     builder.sync(javaInput.getText().length());

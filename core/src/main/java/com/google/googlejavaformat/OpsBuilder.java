@@ -23,6 +23,7 @@ import com.google.googlejavaformat.Indent.Const;
 import com.google.googlejavaformat.Input.Tok;
 import com.google.googlejavaformat.Input.Token;
 import com.google.googlejavaformat.Output.BreakTag;
+import com.google.googlejavaformat.java.JavaFormatterOptions;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -145,6 +146,7 @@ public final class OpsBuilder {
   private final Input input;
   private final List<Op> ops = new ArrayList<>();
   private final Output output;
+  private final JavaFormatterOptions options;
   private static final Indent.Const ZERO = Indent.Const.ZERO;
 
   private int tokenI = 0;
@@ -178,10 +180,12 @@ public final class OpsBuilder {
    *
    * @param input the {@link Input}, used for retrieve information from the AST
    * @param output the {@link Output}, used here only to record blank-line information
+   * @param options options for the formatter
    */
-  public OpsBuilder(Input input, Output output) {
+  public OpsBuilder(Input input, Output output, JavaFormatterOptions options) {
     this.input = input;
     this.output = output;
+    this.options = options;
   }
 
   /** Get the {@code OpsBuilder}'s {@link Input}. */
@@ -579,6 +583,7 @@ public final class OpsBuilder {
      */
     ImmutableList.Builder<Op> newOps = ImmutableList.builder();
     boolean afterForcedBreak = false; // Was the last Op a forced break? If so, suppress spaces.
+    boolean afterOpenBrace = false;
     for (int i = 0; i < opsN; i++) {
       for (Op op : tokOps.get(i)) {
         if (!(afterForcedBreak && op instanceof Doc.Space)) {
@@ -594,9 +599,13 @@ public final class OpsBuilder {
                   && " ".equals(((Doc) op).getFlat())))) {
         continue;
       }
+      if (options.spaceInsideEmptyBlock() && isCloseBrace(op) && afterOpenBrace) {
+        newOps.add(SPACE);
+      }
       newOps.add(op);
       if (!(op instanceof OpenOp)) {
         afterForcedBreak = isForcedBreak(op);
+        afterOpenBrace = isOpenBrace(op);
       }
     }
     for (Op op : tokOps.get(opsN)) {
@@ -610,6 +619,14 @@ public final class OpsBuilder {
 
   private static boolean isForcedBreak(Op op) {
     return op instanceof Doc.Break && ((Doc.Break) op).isForced();
+  }
+
+  private static boolean isOpenBrace(Op op) {
+    return op instanceof Doc.Token && "{".equals(((Doc.Token) op).getToken().getTok().getText());
+  }
+
+  private static boolean isCloseBrace(Op op) {
+    return op instanceof Doc.Token && "}".equals(((Doc.Token) op).getToken().getTok().getText());
   }
 
   private static List<Op> makeComment(Input.Tok comment) {

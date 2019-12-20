@@ -78,11 +78,13 @@ public class JavaFormatterOptions {
   private final Style style;
   private final boolean formatJavadoc;
   private final SingleLineJavadocStyle singleLineJavadocStyle;
+  private final boolean spaceInsideEmptyBlock;
 
   private JavaFormatterOptions(Builder builder) {
     style = builder.style;
     formatJavadoc = builder.formatJavadoc;
     singleLineJavadocStyle = builder.singleLineJavadocStyle;
+    spaceInsideEmptyBlock = builder.spaceInsideEmptyBlock;
   }
 
   /** Returns the multiplier for the unit of indent. */
@@ -97,6 +99,18 @@ public class JavaFormatterOptions {
   /** Returns what style to use when formatting Javadoc comments that fit in a single line. */
   public SingleLineJavadocStyle singleLineJavadocStyle() {
     return singleLineJavadocStyle;
+  }
+
+  /**
+   * Returns whether there should be a space inside of an empty block.
+   *
+   * <p>This is intended to work well with Checkstyle's WhiteSpaceAround check.
+   *
+   * @see <a
+   *     href="https://checkstyle.sourceforge.io/apidocs/com/puppycrawl/tools/checkstyle/checks/whitespace/WhitespaceAroundCheck.html">WhitespaceAroundCheck</a>
+   */
+  public boolean spaceInsideEmptyBlock() {
+    return spaceInsideEmptyBlock;
   }
 
   /** Returns the code style. */
@@ -119,6 +133,7 @@ public class JavaFormatterOptions {
     private Style style = Style.GOOGLE;
     private boolean formatJavadoc = true;
     private SingleLineJavadocStyle singleLineJavadocStyle = SingleLineJavadocStyle.SINGLE_LINE;
+    private boolean spaceInsideEmptyBlock;
 
     private Builder() {}
 
@@ -135,6 +150,12 @@ public class JavaFormatterOptions {
     /** Sets what style to use when formatting Javadoc comments that fit in a single line. */
     public Builder singleLineJavadocStyle(SingleLineJavadocStyle singleLineJavadocStyle) {
       this.singleLineJavadocStyle = singleLineJavadocStyle;
+      return this;
+    }
+
+    /** Returns whether there should be a space inside of an empty block. */
+    public Builder spaceInsideEmptyBlock(boolean spaceInsideEmptyBlock) {
+      this.spaceInsideEmptyBlock = spaceInsideEmptyBlock;
       return this;
     }
 
